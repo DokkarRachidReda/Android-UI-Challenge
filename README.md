@@ -2,7 +2,7 @@
 some beatiful UI's implemented in android studio
 
 ## Task UI
-task application found in [Dribble](https://dribbble.com/shots/7273697-Task-App-UI)
+task UI found in [Dribble](https://dribbble.com/shots/7273697-Task-App-UI)
 
 here are some screenShots : 
 
