@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:id="@+id/host"
+        android:layout_above="@+id/bottomNavigation"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/bottomNavigation"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/x_bottom_navigation"
+        >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/home"
+            >
+
+            <ImageView
+                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/home"
+                android:id="@+id/homeid"
+                android:visibility="visible"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:layout_marginLeft="18dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:text="      Home      "
+                android:layout_alignRight="@+id/homeid"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/x_n_element_bg"
+                android:visibility="gone"
+                android:id="@+id/hometxt"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/task"
+            >
+
+            <ImageView
+                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/n_tasks"
+                android:id="@+id/tasksid"
+                android:visibility="visible"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:text="      Tasks      "
+                android:layout_alignRight="@+id/tasksid"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/x_n_element_bg"
+                android:visibility="gone"
+                android:id="@+id/tasktxt"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/n_search"
+                android:id="@+id/searchid"
+                android:visibility="visible"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:text="      Tasks      "
+                android:layout_alignRight="@+id/searchid"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/x_n_element_bg"
+                android:visibility="gone"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/n_user"
+                android:id="@+id/userid"
+                android:visibility="visible"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:text="   Tasks  "
+                android:layout_alignRight="@+id/userid"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/x_n_element_bg"
+                android:visibility="gone"
+                />
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

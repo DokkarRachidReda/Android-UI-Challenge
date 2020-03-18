@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="10dp"
+    android:weightSum="8"
+
+    >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:weightSum="6"
+        android:layout_marginTop="8dp"
+        >
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="0dp"
+            android:id="@+id/status"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/row_dash_icon"
+            android:layout_marginTop="4dp"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/row_dash_icon"
+            android:layout_marginTop="4dp"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/row_dash_icon"
+            android:layout_marginTop="4dp"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/row_dash_icon"
+            android:layout_marginTop="4dp"
+            />
+
+
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/time"
+        android:layout_weight="2"
+        android:text="9:00"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:id="@+id/content"
+        android:layout_weight="5"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:text="Send the documents to the client"
+        android:elevation="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        />
+
+</LinearLayout>
