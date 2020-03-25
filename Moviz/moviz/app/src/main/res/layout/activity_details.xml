@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="7"
+    android:orientation="vertical"
+    tools:context=".DetailsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"
+        android:background="@drawable/i1"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:weightSum="3"
+            android:background="@drawable/x_rounded_left_25dp_white"
+            android:layout_alignParentBottom="true"
+            android:elevation="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginVertical="20dp"
+            android:orientation="horizontal"
+            >
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_margin="16dp"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_star"
+                />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/pr_bold"
+                    android:text="8.2"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_margin="16dp"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_star_strock"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/pr_bold"
+                    android:text="Rate this"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_margin="16dp"
+                >
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:fontFamily="@font/pr_bold"
+                    android:text="5.3"
+                    android:background="@color/colorAccent"
+                    android:gravity="center"
+                    />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/pr_bold"
+                    android:text="MetaScore"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2.3"
+            android:orientation="vertical"
+            android:weightSum="2"
+            android:layout_marginHorizontal="12dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="28sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/pr_bold"
+                android:text="Ford v Ferrari"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginVertical="12dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/pr_bold"
+                    android:text="2019"
+                    android:layout_marginHorizontal="12dp"
+
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/pr_bold"
+                    android:text="PG-13"
+                    android:layout_marginHorizontal="6dp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/pr_bold"
+                    android:text="2h30"
+                    android:layout_marginHorizontal="8dp"
+
+                    />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="12dp"
+            android:background="@drawable/x_rounded_15_pinko"
+            android:text="+"
+            android:textColor="#fff"
+            android:textSize="28sp"
+            />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="12dp"
+            android:orientation="horizontal"
+            android:id="@+id/catRecycler"
+            android:scrollbars="none"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.8"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Plot Summary"
+            android:textSize="28sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pr_bold"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="16dp"
+            android:id="@+id/plotsummary"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/plotsummary"
+            android:text="this just an example this just an example this just an example this just an example this just an example this just an example this just an example this just an example this just an example this just an example this just an example "
+            android:textSize="16sp"
+            android:textColor="@color/gray"
+            android:fontFamily="@font/pr_bold"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="16dp"
+            />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.4"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Cast and Crew"
+            android:textSize="28sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pr_bold"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="8dp"
+            android:id="@+id/castcrew"
+            />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="12dp"
+            android:orientation="horizontal"
+            android:id="@+id/crewRecycler"
+            android:scrollbars="none"
+            android:layout_below="@+id/castcrew"
+            />
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>
