@@ -13,7 +13,7 @@ here are some screenShots :
 
 
 ## Moviz
-task UI found in [Instagram](https://www.instagram.com/ux_trends/)
+movies app found in [Instagram](https://www.instagram.com/ux_trends/)
 
 here are some screenShots : 
 
