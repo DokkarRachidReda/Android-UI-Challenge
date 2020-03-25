@@ -10,3 +10,14 @@ here are some screenShots :
 
 
 <img src="https://github.com/DokkarRachidReda/Android-UI-Challenge/blob/master/TaskUI/taskui.gif" height="450" width="240">
+
+
+## Moviz
+task UI found in [Instagram](https://www.instagram.com/ux_trends/)
+
+here are some screenShots : 
+
+<img src="https://github.com/DokkarRachidReda/Android-UI-Challenge/blob/master/Moviz/1.jpg" height="450" width="240" hspace="20"><img src="https://github.com/DokkarRachidReda/Android-UI-Challenge/blob/master/Moviz/2.jpg" height="450" width="240" hspace="20">
+
+
+<img src="https://github.com/DokkarRachidReda/Android-UI-Challenge/blob/master/Moviz/gif.gif" height="450" width="240">
