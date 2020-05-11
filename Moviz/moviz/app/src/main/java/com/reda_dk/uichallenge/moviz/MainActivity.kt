@@ -40,7 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
 
     final var baseUrl = "https://api.themoviedb.org/3/"
-    final var api_key = "2e27645e1938878aee2b80d8a00e81a1"
+    final var api_key = ""
     final var imgBaseUrl = "https://image.tmdb.org/t/p/w500"
     var myHolder:TypesRecyclerAdapter.ViewHolder? = null
     var firstType = true
