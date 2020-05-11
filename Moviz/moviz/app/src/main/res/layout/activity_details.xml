@@ -11,10 +11,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.5"
-        android:background="@drawable/i1"
+        android:layout_weight="2.8"
         >
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/movie_img"
+            android:scaleType="fitXY"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,6 +55,7 @@
                     android:fontFamily="@font/pr_bold"
                     android:text="8.2"
                     android:gravity="center"
+                    android:id="@+id/movie_rating"
                     />
             </LinearLayout>
 
@@ -95,6 +101,7 @@
                     android:text="5.3"
                     android:background="@color/colorAccent"
                     android:gravity="center"
+                    android:id="@+id/movie_metascore"
                     />
 
 
@@ -139,6 +146,7 @@
                 android:text="Ford v Ferrari"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginVertical="12dp"
+                android:id="@+id/movie_title"
                 />
 
             <LinearLayout
@@ -153,35 +161,37 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/gray"
                     android:fontFamily="@font/pr_bold"
                     android:text="2019"
                     android:layout_marginHorizontal="12dp"
-
+                    android:id="@+id/movie_releaseyear"
+                    android:maxLines="1"
                     />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/gray"
                     android:fontFamily="@font/pr_bold"
                     android:text="PG-13"
                     android:layout_marginHorizontal="6dp"
+                    android:maxLines="1"
                     />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/gray"
                     android:fontFamily="@font/pr_bold"
                     android:text="2h30"
                     android:layout_marginHorizontal="8dp"
-
+                    android:maxLines="1"
                     />
 
 
@@ -229,7 +239,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.8"
+        android:layout_weight="1.5"
         >
 
         <TextView
@@ -238,7 +248,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Plot Summary"
-            android:textSize="28sp"
+            android:textSize="24sp"
             android:textColor="@color/black"
             android:fontFamily="@font/pr_bold"
             android:layout_marginHorizontal="12dp"
@@ -252,11 +262,12 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/plotsummary"
             android:text="this just an example this just an example this just an example this just an example this just an example this just an example this just an example this just an example this just an example this just an example this just an example "
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/gray"
             android:fontFamily="@font/pr_bold"
             android:layout_marginHorizontal="12dp"
             android:layout_marginVertical="16dp"
+            android:id="@+id/movie_overview"
             />
 
 
@@ -274,7 +285,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Cast and Crew"
-            android:textSize="28sp"
+            android:textSize="24sp"
             android:textColor="@color/black"
             android:fontFamily="@font/pr_bold"
             android:layout_marginHorizontal="12dp"

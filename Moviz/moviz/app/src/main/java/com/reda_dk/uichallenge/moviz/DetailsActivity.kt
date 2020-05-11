@@ -1,5 +1,6 @@
 package com.reda_dk.uichallenge.moviz
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,10 +11,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.reda_dk.uichallenge.moviz.model.CastCrew
+import com.reda_dk.uichallenge.moviz.model.castcrew.CastCrew
+import com.reda_dk.uichallenge.moviz.model.castcrew.MovieWorker
 import com.reda_dk.uichallenge.moviz.model.movies.SingleMovie
 import com.reda_dk.uichallenge.moviz.requestInterface.TmbdEndPoints
+import com.squareup.picasso.Picasso
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.row_categories.view.*
 import kotlinx.android.synthetic.main.row_crew.view.*
@@ -51,11 +56,22 @@ class DetailsActivity : AppCompatActivity() {
         val compositeDisposable = CompositeDisposable()
 
 
-        ////////////////////////////////////////////////////////
+        /////////////////////Movie Details///////////////////////////////////
 
 
         var movie = intent.getSerializableExtra("movie") as SingleMovie
-        Log.e("movie",movie.title)
+
+        movie_title.text = movie.title 
+        movie_overview.text = movie.overview
+        movie_releaseyear.text = movie.release_date.subSequence(0,4).trim()
+        movie_rating.text = movie.vote_average.toString()
+
+        Picasso.get().load(imgBaseUrl+movie.poster_path).into(movie_img)
+
+
+
+
+        ////////////////////////////////Genres /////////////////////////////////////////////
 
 
 
@@ -68,46 +84,60 @@ class DetailsActivity : AppCompatActivity() {
 
 
 
-        //////////////////////////////////////////////////
-        var mlist = ArrayList<CastCrew>();mlist.add(
-            CastCrew(
-                "James Mangold",
-                "Director",
-                R.drawable.circle1
-            )
-        );mlist.add(
-            CastCrew(
-                "Matt Damon",
-                "Carroll",
-                R.drawable.circle2
-            )
+        ////////////////////////Crew Cast//////////////////////////
+        compositeDisposable.add(
+            apiservices.getCastCrew(movie.id.toString(),api_key)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                . subscribe(this::onCastCrewResponse, this::onCastCrewFailure)
         )
+    }
 
-        mlist.add(
-            CastCrew(
-                "Christian Bale",
-                "Ken Miles",
-                R.drawable.circle3
-            )
-        );mlist.add(
-            CastCrew(
-                "James Mangold",
-                "Director",
-                R.drawable.circle1
-            )
-        );mlist.add(
-            CastCrew(
-                "Matt Damon",
-                "Carroll",
-                R.drawable.circle2
-            )
-        )
 
-        var crewAdapter = CastCrewRecyclerAdapter(mlist)
+
+    private fun onCastCrewFailure(t: Throwable) {
+
+        Log.e("Tmdb-api-movies","api call failed  : "+t.toString())
+    }
+
+    private fun onCastCrewResponse(response: CastCrew){
+        Log.e("Tmdb-api-cast-succeed","cast size : "+response.cast.size+"  crew size : "+response.crew.size)
+
+        var list = ArrayList<MovieWorker>()
+        var i = 0
+        for ( cast in response.cast){
+
+            if(cast.profile_path != null) {
+                list.add(
+                    MovieWorker(
+                        cast.name,cast.character,cast.profile_path
+                    ))
+
+                i++
+            }
+
+            if (i>20) break
+        }
+
+        for ( crew in response.crew){
+
+            if(crew.profile_path != null){
+                list.add(MovieWorker(
+                    crew.name,crew.job,crew.profile_path
+                ))
+                i++
+            }
+
+
+            if (i>20) break
+        }
+
+
+        Log.e("crew-recycler","size : "+list.size)
+        val crewAdapter = CastCrewRecyclerAdapter(list)
 
         crewRecycler.layoutManager =  LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         crewRecycler.setAdapter(crewAdapter)
-
 
     }
 
@@ -171,8 +201,8 @@ class DetailsActivity : AppCompatActivity() {
 
     inner class CastCrewRecyclerAdapter: RecyclerView.Adapter<CastCrewRecyclerAdapter.ViewHolder>{
 
-        var list = ArrayList<CastCrew>()
-        constructor(list:ArrayList<CastCrew>){this.list = list}
+        var list = ArrayList<MovieWorker>()
+        constructor(list:ArrayList<MovieWorker>){this.list = list}
 
         inner class ViewHolder: RecyclerView.ViewHolder{
 
@@ -207,11 +237,20 @@ class DetailsActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.name.text = list[position].name
             holder.function.text = list[position].function
-            holder.img.setImageResource(list[position].img)
+            /*if(list[position].img != null) {
+                Picasso.get().load(list[position].img).into(holder.img)
+                Log.e("cast-crew-img", "image path  on posittion $position is null")
+            }*/
 
         }
     }
 
 
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        startActivity(Intent(this,MainActivity::class.java))
+    }
 
 }

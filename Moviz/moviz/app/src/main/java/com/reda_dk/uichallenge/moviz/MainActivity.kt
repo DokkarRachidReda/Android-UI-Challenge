@@ -327,8 +327,6 @@ class MainActivity : AppCompatActivity() {
             holder.rating.text = list[position].vote_average.toString()
             Picasso.get().load(imgBaseUrl+list[position].poster_path).into(holder.img)
 
-            Log.e("img-path",imgBaseUrl+list[position].poster_path)
-
             holder.img.clipToOutline = true
 
             val animationY = ObjectAnimator.ofFloat( holder.img, "rotationY", 15f, 0f)
@@ -347,6 +345,7 @@ class MainActivity : AppCompatActivity() {
                     i.putExtra("movie",list[position])
 
                     this@MainActivity.startActivity(i)
+                    finish()
                 }
             })
             
@@ -367,5 +366,8 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
+
+
 
 }

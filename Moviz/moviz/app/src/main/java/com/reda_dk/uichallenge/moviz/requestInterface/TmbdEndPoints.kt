@@ -25,5 +25,5 @@ interface TmbdEndPoints {
 
 
     @GET("movie/{movie_id}/credits")
-    fun getCastCrew(@Query("api_key")api_key:String, @Path("movie_id") movie_id:String): Observable<CastCrew>
+    fun getCastCrew(@Path("movie_id") movie_id:String,@Query("api_key")api_key:String): Observable<CastCrew>
 }
