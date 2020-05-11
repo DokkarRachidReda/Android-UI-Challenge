@@ -61,10 +61,12 @@ class DetailsActivity : AppCompatActivity() {
 
         var movie = intent.getSerializableExtra("movie") as SingleMovie
 
-        movie_title.text = movie.title 
-        movie_overview.text = movie.overview
-        movie_releaseyear.text = movie.release_date.subSequence(0,4).trim()
-        movie_rating.text = movie.vote_average.toString()
+        Log.e("movie-details","id : "+movie.id)
+
+        movie_title.text = if(movie.title != "") movie.title else "NA"
+        movie_overview.text = if(movie.overview != "") movie.overview else "NA"
+        movie_releaseyear.text = if(movie.release_date.subSequence(0,4).trim() != "") movie.release_date.subSequence(0,4).trim() else "NA"
+        movie_rating.text = if(movie.vote_average.toString() != "") movie.vote_average.toString()else "NA"
 
         Picasso.get().load(imgBaseUrl+movie.poster_path).into(movie_img)
 
@@ -237,6 +239,9 @@ class DetailsActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.name.text = list[position].name
             holder.function.text = list[position].function
+
+            Picasso.get().load(imgBaseUrl+list[position].img).into(holder.img)
+            Log.e("cast-crew-img", "image path  on posittion $position is"+ imgBaseUrl+list[position].img)
             /*if(list[position].img != null) {
                 Picasso.get().load(list[position].img).into(holder.img)
                 Log.e("cast-crew-img", "image path  on posittion $position is null")
