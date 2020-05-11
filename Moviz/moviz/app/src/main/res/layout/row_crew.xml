@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="120dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="140dp"
+    android:background="#00FFFFFF"
+    android:gravity="center"
     android:layout_height="150dp">
 
     <LinearLayout
@@ -8,6 +11,7 @@
         android:layout_height="match_parent"
         android:weightSum="4"
         android:orientation="vertical"
+
         >
 
         <de.hdodenhof.circleimageview.CircleImageView

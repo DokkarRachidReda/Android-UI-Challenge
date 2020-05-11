@@ -241,7 +241,7 @@ class DetailsActivity : AppCompatActivity() {
             holder.function.text = list[position].function
 
             Picasso.get().load(imgBaseUrl+list[position].img).into(holder.img)
-            Log.e("cast-crew-img", "image path  on posittion $position is"+ imgBaseUrl+list[position].img)
+
             /*if(list[position].img != null) {
                 Picasso.get().load(list[position].img).into(holder.img)
                 Log.e("cast-crew-img", "image path  on posittion $position is null")
