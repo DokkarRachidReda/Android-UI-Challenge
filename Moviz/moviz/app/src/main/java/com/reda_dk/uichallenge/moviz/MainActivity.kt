@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -19,17 +20,50 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.recyclerview.widget.RecyclerView
+import com.reda_dk.uichallenge.moviz.model.genres.Genres
+import com.reda_dk.uichallenge.moviz.model.genres.SingleGenre
+import com.reda_dk.uichallenge.moviz.model.movies.Movies
+import com.reda_dk.uichallenge.moviz.model.movies.SingleMovie
+import com.reda_dk.uichallenge.moviz.requestInterface.TmbdEndPoints
+import com.squareup.picasso.Picasso
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.row_categories.view.*
 import kotlinx.android.synthetic.main.row_moviz.view.*
 import kotlinx.android.synthetic.main.row_types.view.*
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
+
+    final var baseUrl = "https://api.themoviedb.org/3/"
+    final var api_key = "2e27645e1938878aee2b80d8a00e81a1"
+    final var imgBaseUrl = "https://image.tmdb.org/t/p/w500"
     var myHolder:TypesRecyclerAdapter.ViewHolder? = null
     var firstType = true
     var searchVisible = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        /////////////////////////////// API CALL////////////////////////////////
+         val client = OkHttpClient
+            .Builder()
+            .build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(client)
+            .build()
+
+        val apiservices = retrofit.create(TmbdEndPoints::class.java)
+        val compositeDisposable = CompositeDisposable()
 
 
         search_icon.setOnClickListener(object : View.OnClickListener {
@@ -42,11 +76,6 @@ class MainActivity : AppCompatActivity() {
 
             }
         })
-
-      
-
-
-
         /////////////////////////////////////////////////////////
         var list = ArrayList<String>();list.add("In Theater");list.add("Box Office");list.add("In Theater");list.add("Box Office")
         var typesAdapter = TypesRecyclerAdapter(list)
@@ -56,32 +85,24 @@ class MainActivity : AppCompatActivity() {
             setAdapter(typesAdapter)
         }
 
-        ///////////////////////////////////////////////////////////
+        /////////////////////////Genres GET REQUEST///////////////////////////////////////////
+
+        compositeDisposable.add(
+            apiservices.getGenres(api_key)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                . subscribe(this::onGenresResponse, this::onGenresFailure)
+        )
 
 
-        //////////////////////////////////////////////////////////
-        var list1 = ArrayList<String>();list1.add("Action");list1.add("Crime");list1.add("Comedy");list1.add("Drama");list1.add("Comedy");
-        var catRecyclerAdapter = CategoriesRecyclerAdapter(list1)
 
-
-        catRecycler.layoutManager =  LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
-        catRecycler.setAdapter(catRecyclerAdapter)
-
-        //////////////////////////////////////////////////////////
-
-
-        /////////////////////////////////////////////////////////
-
-        var mlist = ArrayList<Movie>();
-        mlist.add(Movie("Avengers",8.2,R.drawable.i1)); mlist.add(Movie("Ford v Ferrari",8.8,R.drawable.i2))
-        mlist.add(Movie("The Joker",7.2,R.drawable.i3)); mlist.add(Movie("Island of Skulls",9.2,R.drawable.i4))
-        mlist.add(Movie("Avengers",8.2,R.drawable.i1)); mlist.add(Movie("Ford v Ferrari",8.8,R.drawable.i2))
-        mlist.add(Movie("The Joker",7.2,R.drawable.i3)); mlist.add(Movie("Island of Skulls",9.2,R.drawable.i4))
-
-        var movieAdapter = MovizRecyclerAdapter(mlist)
-
-        movizRecycler.layoutManager =  LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
-        movizRecycler.setAdapter(movieAdapter)
+        /////////////// TOP Movies GET REQUEST///////////////////////////////////////////
+        compositeDisposable.add(
+            apiservices.getLatestMovies(api_key)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                . subscribe(this::onMoviesResponse, this::onMoviesFailure)
+        )
 
         ////////////////////////////////////////////////////////
 
@@ -90,6 +111,42 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
+    private fun onGenresFailure(t: Throwable) {
+
+        Log.e("Tmdb-api","api call failed  : "+t.toString())
+    }
+
+    private fun onGenresResponse(response: Genres) {
+        Log.e("Tmdb-api-genres","api call succeed")
+
+        Log.e("Tmdb-api-genres-succeed","size  : "+response.genres.size)
+
+        var catRecyclerAdapter = CategoriesRecyclerAdapter(response.genres)
+
+
+        catRecycler.layoutManager =  LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
+        catRecycler.setAdapter(catRecyclerAdapter)
+
+
+    }
+
+
+
+    private fun onMoviesFailure(t: Throwable) {
+
+        Log.e("Tmdb-api-movies","api call failed  : "+t.toString())
+    }
+
+    private fun onMoviesResponse(response: Movies){
+        Log.e("Tmdb-api-movies-succeed"," size : "+ response.results.size +" total_results  : "+response.total_results + "  total_pages "+response.total_pages)
+
+        var movieAdapter = MovizRecyclerAdapter(response.results)
+        movizRecycler.layoutManager =  LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
+        movizRecycler.setAdapter(movieAdapter)
+
+    }
 
 
     inner class TypesRecyclerAdapter:RecyclerView.Adapter<TypesRecyclerAdapter.ViewHolder> {
@@ -165,8 +222,8 @@ class MainActivity : AppCompatActivity() {
 
     inner class CategoriesRecyclerAdapter:RecyclerView.Adapter<CategoriesRecyclerAdapter.ViewHolder>{
 
-        var list = ArrayList<String>()
-        constructor(list:ArrayList<String>){this.list = list}
+        var list = ArrayList<SingleGenre>()
+        constructor(list:ArrayList<SingleGenre>){this.list = list}
 
         inner class ViewHolder:RecyclerView.ViewHolder{
 
@@ -195,7 +252,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.category.text = list[position]
+            holder.category.text = list[position].name
             holder.category.tag = "no" // not clicked yet
 
             holder.category.setOnClickListener(object : View.OnClickListener {
@@ -228,8 +285,8 @@ class MainActivity : AppCompatActivity() {
 
     inner class MovizRecyclerAdapter:RecyclerView.Adapter<MovizRecyclerAdapter.ViewHolder>{
 
-        var list = ArrayList<Movie>()
-        constructor(list:ArrayList<Movie>){this.list = list}
+        var list = ArrayList<SingleMovie>()
+        constructor(list:ArrayList<SingleMovie>){this.list = list}
 
         inner class ViewHolder:RecyclerView.ViewHolder{
 
@@ -267,8 +324,11 @@ class MainActivity : AppCompatActivity() {
 
 
             holder.title.text = list[position].title
-            holder.rating.text = list[position].rating.toString()
-            holder.img.setImageResource(list[position].img)
+            holder.rating.text = list[position].vote_average.toString()
+            Picasso.get().load(imgBaseUrl+list[position].poster_path).into(holder.img)
+
+            Log.e("img-path",imgBaseUrl+list[position].poster_path)
+
             holder.img.clipToOutline = true
 
             val animationY = ObjectAnimator.ofFloat( holder.img, "rotationY", 15f, 0f)
@@ -283,12 +343,10 @@ class MainActivity : AppCompatActivity() {
 
             holder.itemView.img.setOnClickListener(object :View.OnClickListener{
                 override fun onClick(v: View?) {
-                    var intent  = Intent(this@MainActivity,DetailsActivity::class.java)
-                    intent.putExtra("img",list[position].img)
-                    intent.putExtra("rating",list[position].rating)
-                    intent.putExtra("title",list[position].title)
+                    var i = Intent(this@MainActivity,DetailsActivity::class.java)
+                    i.putExtra("movie",list[position])
 
-                    startActivity(intent)
+                    this@MainActivity.startActivity(i)
                 }
             })
             

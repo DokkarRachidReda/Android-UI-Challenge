@@ -2,24 +2,61 @@ package com.reda_dk.uichallenge.moviz
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.reda_dk.uichallenge.moviz.model.CastCrew
+import com.reda_dk.uichallenge.moviz.model.movies.SingleMovie
+import com.reda_dk.uichallenge.moviz.requestInterface.TmbdEndPoints
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.row_categories.view.*
 import kotlinx.android.synthetic.main.row_crew.view.*
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 class DetailsActivity : AppCompatActivity() {
+    final var baseUrl = "https://api.themoviedb.org/3/"
+    final var api_key = "2e27645e1938878aee2b80d8a00e81a1"
+    final var imgBaseUrl = "https://image.tmdb.org/t/p/w500"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
+
+
+
+        ////////////////Retrofit conf////////////////////////////
+
+        val client = OkHttpClient
+            .Builder()
+            .build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(client)
+            .build()
+
+        val apiservices = retrofit.create(TmbdEndPoints::class.java)
+        val compositeDisposable = CompositeDisposable()
+
+
+        ////////////////////////////////////////////////////////
+
+
+        var movie = intent.getSerializableExtra("movie") as SingleMovie
+        Log.e("movie",movie.title)
+
 
 
         var list1 = ArrayList<String>();list1.add("Action");list1.add("Crime");list1.add("Comedy");list1.add("Drama");
@@ -32,9 +69,39 @@ class DetailsActivity : AppCompatActivity() {
 
 
         //////////////////////////////////////////////////
-        var mlist = ArrayList<CastCrew>();mlist.add(CastCrew("James Mangold","Director",R.drawable.circle1));mlist.add(CastCrew("Matt Damon","Carroll",R.drawable.circle2))
+        var mlist = ArrayList<CastCrew>();mlist.add(
+            CastCrew(
+                "James Mangold",
+                "Director",
+                R.drawable.circle1
+            )
+        );mlist.add(
+            CastCrew(
+                "Matt Damon",
+                "Carroll",
+                R.drawable.circle2
+            )
+        )
 
-        mlist.add(CastCrew("Christian Bale","Ken Miles",R.drawable.circle3));mlist.add(CastCrew("James Mangold","Director",R.drawable.circle1));mlist.add(CastCrew("Matt Damon","Carroll",R.drawable.circle2))
+        mlist.add(
+            CastCrew(
+                "Christian Bale",
+                "Ken Miles",
+                R.drawable.circle3
+            )
+        );mlist.add(
+            CastCrew(
+                "James Mangold",
+                "Director",
+                R.drawable.circle1
+            )
+        );mlist.add(
+            CastCrew(
+                "Matt Damon",
+                "Carroll",
+                R.drawable.circle2
+            )
+        )
 
         var crewAdapter = CastCrewRecyclerAdapter(mlist)
 
