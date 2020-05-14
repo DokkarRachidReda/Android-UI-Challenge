@@ -46,7 +46,7 @@ class Register : AppCompatActivity() {
             .build()
 
         val movizApi = Movizretrofit.create(MovizApiEndPoints::class.java)
-        
+
 
         signUp.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {

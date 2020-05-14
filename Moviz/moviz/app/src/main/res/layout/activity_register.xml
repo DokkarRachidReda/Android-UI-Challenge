@@ -8,17 +8,60 @@
     android:orientation="vertical"
    >
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        />
+   <ImageView
+       android:layout_width="150dp"
+       android:layout_height="0dp"
+       android:layout_weight="1"
+       android:src="@drawable/ic_user"
+       android:layout_gravity="center"
+       />
 
-    <TextView
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Hello mate !!, Create new account now"
-        android:fontFamily="@font/pr_bold"
-        android:textColor="#111"
-        android:gravity="center"
-        android:textSize="24sp"
-        />
+        android:orientation="vertical"
+        android:weightSum="4"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="UserName "
+            android:fontFamily="@font/pr_regular"
+            android:textColor="#111"
+            android:textSize="20sp"
+            android:layout_marginHorizontal="22dp"
+            android:layout_marginVertical="8dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="16dp"
+            android:hint="john"
+            android:gravity="left|center_vertical"
+            android:fontFamily="@font/pr_regular"
+            android:textColor="#111"
+            android:id="@+id/s_username"
+            android:background="@drawable/x_rounded_15dp_gray"
+            android:paddingHorizontal="12dp"
+            />
+
+
+    </LinearLayout>
 
 
     <LinearLayout
@@ -26,6 +69,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
+        android:weightSum="4"
         >
 
         <TextView
@@ -35,20 +79,23 @@
             android:fontFamily="@font/pr_regular"
             android:textColor="#111"
             android:textSize="20sp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="22dp"
             android:layout_marginVertical="8dp"
             />
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:layout_gravity="center"
             android:layout_marginHorizontal="16dp"
             android:hint="mail@server.com"
-            android:gravity="left"
+            android:gravity="left|center_vertical"
             android:fontFamily="@font/pr_regular"
             android:textColor="#111"
             android:id="@+id/s_mail"
+            android:background="@drawable/x_rounded_15dp_gray"
+            android:paddingHorizontal="12dp"
             />
 
     </LinearLayout>
@@ -59,6 +106,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
+        android:weightSum="4"
         >
 
         <TextView
@@ -68,59 +116,28 @@
             android:fontFamily="@font/pr_regular"
             android:textColor="#111"
             android:textSize="20sp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="22dp"
             android:layout_marginVertical="8dp"
             />
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:layout_gravity="center"
             android:layout_marginHorizontal="16dp"
             android:hint="********"
             android:inputType="textPassword"
-            android:gravity="left"
+            android:gravity="left|center_vertical"
             android:fontFamily="@font/pr_regular"
             android:textColor="#111"
             android:id="@+id/s_pass"
-
+            android:background="@drawable/x_rounded_15dp_gray"
+            android:paddingHorizontal="12dp"
             />
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="   UserName "
-            android:fontFamily="@font/pr_regular"
-            android:textColor="#111"
-            android:textSize="20sp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp"
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="16dp"
-            android:hint="john"
-            android:gravity="left"
-            android:fontFamily="@font/pr_regular"
-            android:textColor="#111"
-            android:id="@+id/s_username"
-
-            />
-
-    </LinearLayout>
 
 
 
@@ -128,6 +145,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginHorizontal="40dp"
         >
         <Button
             android:layout_width="match_parent"
@@ -135,7 +153,7 @@
             android:layout_gravity="center"
             android:layout_marginHorizontal="16dp"
             android:text="Register Now  "
-            android:fontFamily="@font/pr_regular"
+            android:fontFamily="@font/pr_bold"
             android:textColor="#fff"
             android:id="@+id/signUp"
             android:background="@drawable/x_rounded_15_pinko"
