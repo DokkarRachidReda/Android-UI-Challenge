@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="6"
+    android:orientation="vertical"
+   >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Hello mate !!, Create new account now"
+        android:fontFamily="@font/pr_bold"
+        android:textColor="#111"
+        android:gravity="center"
+        android:textSize="24sp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="E mail"
+            android:fontFamily="@font/pr_regular"
+            android:textColor="#111"
+            android:textSize="20sp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="16dp"
+            android:hint="mail@server.com"
+            android:gravity="left"
+            android:fontFamily="@font/pr_regular"
+            android:textColor="#111"
+            android:id="@+id/s_mail"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Password"
+            android:fontFamily="@font/pr_regular"
+            android:textColor="#111"
+            android:textSize="20sp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="16dp"
+            android:hint="********"
+            android:inputType="textPassword"
+            android:gravity="left"
+            android:fontFamily="@font/pr_regular"
+            android:textColor="#111"
+            android:id="@+id/s_pass"
+
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="   UserName "
+            android:fontFamily="@font/pr_regular"
+            android:textColor="#111"
+            android:textSize="20sp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="16dp"
+            android:hint="john"
+            android:gravity="left"
+            android:fontFamily="@font/pr_regular"
+            android:textColor="#111"
+            android:id="@+id/s_username"
+
+            />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="16dp"
+            android:text="Register Now  "
+            android:fontFamily="@font/pr_regular"
+            android:textColor="#fff"
+            android:id="@+id/signUp"
+            android:background="@drawable/x_rounded_15_pinko"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

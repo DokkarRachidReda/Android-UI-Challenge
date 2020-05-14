@@ -43,12 +43,9 @@ import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
 
     final var baseUrl = "https://api.themoviedb.org/3/"
-<<<<<<< HEAD
     final var movizBaseUrl = "http://192.168.1.6:3000/"
     final var api_key = "2e27645e1938878aee2b80d8a00e81a1"
-=======
-    final var api_key = ""
->>>>>>> 3f8c946efb1e623a300afe32661933325915c93f
+
     final var imgBaseUrl = "https://image.tmdb.org/t/p/w500"
     var myHolder:TypesRecyclerAdapter.ViewHolder? = null
     var firstType = true
@@ -113,20 +110,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         /////////////////////////User Data Request ///////////////////////////////////////////
-        compositeDisposable.add(
-            movizApi.getUser("iddd")
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                . subscribe(this::onUserDataResponse, this::onUserDataFailure)
-        )
 
-
-        compositeDisposable.add(
-            movizApi.createUser(User("hello@me.com","hhhhh",""))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                . subscribe(this::onCreateResponse, this::onCreateFailure)
-        )
 
 
         /////////////////////////Genres GET REQUEST///////////////////////////////////////////
@@ -154,29 +138,9 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    private fun onCreateFailure(t: Throwable) {
-
-        Log.e("Moviz-api","api call failed  : "+t.toString())
-    }
-
-    private fun onCreateResponse(response: Any) {
-        Log.e("Moviz-api ","user added")
-
-    }
 
 
 
-
-    private fun onUserDataFailure(t: Throwable) {
-
-        Log.e("Moviz-api","api call failed  : "+t.toString())
-    }
-
-    private fun onUserDataResponse(response: User) {
-        Log.e("Moviz-api ","api call succeed")
-
-        Log.e("user-data :","email :"+response.email + "  img : "+response.img + "  !")
-    }
 
     private fun onGenresFailure(t: Throwable) {
 

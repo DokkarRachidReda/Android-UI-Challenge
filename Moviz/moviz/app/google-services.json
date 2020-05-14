@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1005565532335",
+    "firebase_url": "https://take-care-ab12b.firebaseio.com",
+    "project_id": "take-care-ab12b",
+    "storage_bucket": "take-care-ab12b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005565532335:android:e55db0f1ddad2a998adc5a",
+        "android_client_info": {
+          "package_name": "com.reda_dk.uichallenge.moviz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005565532335-6esng028q4djrhg0f32mbaetibk3lfqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS2eFYBSlLXGqaxQWfpyPsn0jlsn7iFbc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1005565532335-6esng028q4djrhg0f32mbaetibk3lfqk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

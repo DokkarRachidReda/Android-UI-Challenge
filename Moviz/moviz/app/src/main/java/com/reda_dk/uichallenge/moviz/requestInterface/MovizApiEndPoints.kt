@@ -1,5 +1,6 @@
 package com.reda_dk.uichallenge.moviz.requestInterface
 
+import com.reda_dk.uichallenge.moviz.model.ServerResponse
 import com.reda_dk.uichallenge.moviz.model.User
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -11,7 +12,7 @@ interface MovizApiEndPoints {
 
 
         @POST("users/")
-        fun createUser(@Body user: User) : Observable<Any>
+        fun createUser(@Body user: User) : Observable<ServerResponse>
 
 
 }
