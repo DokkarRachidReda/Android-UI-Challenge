@@ -4,7 +4,7 @@ some beatiful UI's implemented in android studio
 ## Task UI
 task UI found in [Dribble](https://dribbble.com/shots/7273697-Task-App-UI)
 
-give it a try [here](https://www.mediafire.com/file/incpy873v6dv7gp/Taskui.apk/file)
+give it a try [here](https://github.com/DokkarRachidReda/Android-UI-Challenge/blob/master/TaskUI/TaskUI/app/release/Taskui.apk)
 
 here are some screenShots : 
 
@@ -19,7 +19,7 @@ movies app found in [Instagram](https://www.instagram.com/ux_trends/) , the app 
 
 Data from [TMBD API](https://developers.themoviedb.org/3/getting-started/introduction) consumed using retrofit and RxJava
 
-you can try the app by downloading the apk file [here](https://www.mediafire.com/file/ttptyggh1ubz7l7/moviz.apk/file)
+you can try the app by downloading the apk file [here](https://github.com/DokkarRachidReda/Android-UI-Challenge/blob/master/Moviz/moviz/app/release/app-release.apk)
 
 here are some screenShots : 
 

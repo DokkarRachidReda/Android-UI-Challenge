@@ -43,8 +43,12 @@ import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
 
     final var baseUrl = "https://api.themoviedb.org/3/"
+<<<<<<< HEAD
     final var movizBaseUrl = "http://192.168.1.6:3000/"
     final var api_key = "2e27645e1938878aee2b80d8a00e81a1"
+=======
+    final var api_key = ""
+>>>>>>> 3f8c946efb1e623a300afe32661933325915c93f
     final var imgBaseUrl = "https://image.tmdb.org/t/p/w500"
     var myHolder:TypesRecyclerAdapter.ViewHolder? = null
     var firstType = true
