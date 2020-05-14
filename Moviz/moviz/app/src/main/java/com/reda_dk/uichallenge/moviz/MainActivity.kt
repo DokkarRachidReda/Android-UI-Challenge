@@ -20,10 +20,12 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.recyclerview.widget.RecyclerView
+import com.reda_dk.uichallenge.moviz.model.User
 import com.reda_dk.uichallenge.moviz.model.genres.Genres
 import com.reda_dk.uichallenge.moviz.model.genres.SingleGenre
 import com.reda_dk.uichallenge.moviz.model.movies.Movies
 import com.reda_dk.uichallenge.moviz.model.movies.SingleMovie
+import com.reda_dk.uichallenge.moviz.requestInterface.MovizApiEndPoints
 import com.reda_dk.uichallenge.moviz.requestInterface.TmbdEndPoints
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -36,19 +38,40 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
     final var baseUrl = "https://api.themoviedb.org/3/"
+    final var movizBaseUrl = "http://192.168.1.6:3000/"
     final var api_key = "2e27645e1938878aee2b80d8a00e81a1"
     final var imgBaseUrl = "https://image.tmdb.org/t/p/w500"
     var myHolder:TypesRecyclerAdapter.ViewHolder? = null
     var firstType = true
     var searchVisible = false
+
+    val compositeDisposable = CompositeDisposable()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val mclient = OkHttpClient.Builder()
+            .connectTimeout(180, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .build()
+
+
+
+        val Movizretrofit = Retrofit.Builder()
+            .baseUrl(movizBaseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(mclient)
+            .build()
+
+        val movizApi = Movizretrofit.create(MovizApiEndPoints::class.java)
 
         /////////////////////////////// API CALL////////////////////////////////
          val client = OkHttpClient
@@ -63,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         val apiservices = retrofit.create(TmbdEndPoints::class.java)
-        val compositeDisposable = CompositeDisposable()
+
 
 
         search_icon.setOnClickListener(object : View.OnClickListener {
@@ -84,6 +107,23 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
             setAdapter(typesAdapter)
         }
+
+        /////////////////////////User Data Request ///////////////////////////////////////////
+        compositeDisposable.add(
+            movizApi.getUser("iddd")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                . subscribe(this::onUserDataResponse, this::onUserDataFailure)
+        )
+
+
+        compositeDisposable.add(
+            movizApi.createUser(User("hello@me.com","hhhhh",""))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                . subscribe(this::onCreateResponse, this::onCreateFailure)
+        )
+
 
         /////////////////////////Genres GET REQUEST///////////////////////////////////////////
 
@@ -110,8 +150,29 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+    private fun onCreateFailure(t: Throwable) {
+
+        Log.e("Moviz-api","api call failed  : "+t.toString())
+    }
+
+    private fun onCreateResponse(response: Any) {
+        Log.e("Moviz-api ","user added")
+
+    }
 
 
+
+
+    private fun onUserDataFailure(t: Throwable) {
+
+        Log.e("Moviz-api","api call failed  : "+t.toString())
+    }
+
+    private fun onUserDataResponse(response: User) {
+        Log.e("Moviz-api ","api call succeed")
+
+        Log.e("user-data :","email :"+response.email + "  img : "+response.img + "  !")
+    }
 
     private fun onGenresFailure(t: Throwable) {
 
@@ -137,10 +198,16 @@ class MainActivity : AppCompatActivity() {
     private fun onMoviesFailure(t: Throwable) {
 
         Log.e("Tmdb-api-movies","api call failed  : "+t.toString())
+        empty.visibility  =View.VISIBLE;empty.playAnimation()
     }
 
     private fun onMoviesResponse(response: Movies){
         Log.e("Tmdb-api-movies-succeed"," size : "+ response.results.size +" total_results  : "+response.total_results + "  total_pages "+response.total_pages)
+
+       if(response.results.size == 0) empty.visibility  =View.VISIBLE;empty.playAnimation()
+
+
+
 
         var movieAdapter = MovizRecyclerAdapter(response.results)
         movizRecycler.layoutManager =  LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)

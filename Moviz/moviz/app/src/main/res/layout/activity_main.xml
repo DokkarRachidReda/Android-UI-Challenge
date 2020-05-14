@@ -84,6 +84,16 @@
         android:layout_weight="4.5"
         android:layout_marginLeft="12dp"
         >
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            app:lottie_fileName="empty_list.json"
+            android:layout_height="match_parent"
+            android:foregroundGravity="center"
+            android:visibility="gone"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

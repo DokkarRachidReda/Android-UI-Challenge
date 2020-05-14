@@ -20,7 +20,7 @@ interface TmbdEndPoints {
                         @Query("sort_by")sort_by:String="vote_count.desc",
                         @Query("include_adult")include_adult:String="false",
                         @Query("include_video")include_video:String="false",
-                        @Query("page")page:String="3"): Observable<Movies>
+                        @Query("page")page:String="1"): Observable<Movies>
 
 
 
