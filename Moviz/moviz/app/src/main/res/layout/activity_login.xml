@@ -4,71 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="6"
+    android:weightSum="10"
     android:orientation="vertical"
-   >
+    tools:context=".Auth.Login">
 
-    <View
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.4"
+        android:layout_weight="4"
+        android:src="@drawable/ic_background"
         />
-   <de.hdodenhof.circleimageview.CircleImageView
-       android:layout_width="150dp"
-       android:layout_height="0dp"
-       android:layout_weight="1"
-       android:src="@drawable/ic_user"
-       android:layout_gravity="center"
-       android:id="@+id/user_image"
-       />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:weightSum="4"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="UserName "
-            android:fontFamily="@font/pr_regular"
-            android:textColor="#111"
-            android:textSize="20sp"
-            android:layout_marginHorizontal="22dp"
-            android:layout_marginVertical="8dp"
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2.5"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="16dp"
-            android:hint="john"
-            android:gravity="left|center_vertical"
-            android:fontFamily="@font/pr_regular"
-            android:textColor="#111"
-            android:id="@+id/s_username"
-            android:background="@drawable/x_rounded_15dp_gray"
-            android:paddingHorizontal="12dp"
-            />
-
-
-    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="vertical"
         android:weightSum="4"
         >
@@ -94,7 +46,7 @@
             android:gravity="left|center_vertical"
             android:fontFamily="@font/pr_regular"
             android:textColor="#111"
-            android:id="@+id/s_mail"
+            android:id="@+id/mail"
             android:background="@drawable/x_rounded_15dp_gray"
             android:paddingHorizontal="12dp"
             />
@@ -105,7 +57,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="vertical"
         android:weightSum="4"
         >
@@ -132,7 +84,7 @@
             android:gravity="left|center_vertical"
             android:fontFamily="@font/pr_regular"
             android:textColor="#111"
-            android:id="@+id/s_pass"
+            android:id="@+id/pass"
             android:background="@drawable/x_rounded_15dp_gray"
             android:paddingHorizontal="12dp"
             android:paddingTop="6dp"
@@ -152,7 +104,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginHorizontal="16dp"
-            android:text="Register Now  "
+            android:text="Login Now  "
             android:fontFamily="@font/pr_bold"
             android:textColor="#fff"
             android:id="@+id/signUp"
@@ -161,16 +113,24 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:text="Already have an account ?,LogIn Now"
+        android:text="Don't have an account ?,Register Now"
         android:textSize="18sp"
         android:textColor="#111"
         android:fontFamily="@font/pr_regular"
         android:layout_gravity="center"
         />
+
+
+
 
 </LinearLayout>

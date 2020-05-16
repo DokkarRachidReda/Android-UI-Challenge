@@ -18,6 +18,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
+import com.reda_dk.uichallenge.moviz.MainActivity
 import com.reda_dk.uichallenge.moviz.R
 import com.reda_dk.uichallenge.moviz.model.ServerResponse
 import com.reda_dk.uichallenge.moviz.model.User
@@ -42,7 +43,7 @@ import java.util.concurrent.TimeUnit
 
 
 class Register : AppCompatActivity() {
-    final var movizBaseUrl = "http://192.168.1.3:3000/"
+    var movizBaseUrl = "http://192.168.1.3:3000/"
     val compositeDisposable = CompositeDisposable()
     val mAuth = FirebaseAuth.getInstance()
 
@@ -50,6 +51,8 @@ class Register : AppCompatActivity() {
 
     var imageUri:Uri? = null
 
+    var uploadStatus = 0 //no request 1:succeed -1 : failed
+    var createUserStatus = 0 //no request 1:succeed -1 : failed
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -78,6 +81,8 @@ class Register : AppCompatActivity() {
                     .addOnCompleteListener { task: Task<AuthResult> ->
 
                         if(task.isSuccessful){
+                            createUserStatus = 0
+                            uploadStatus = 0
                             // create user in db
                             val user = User(mAuth.uid!!,s_mail.text.toString(),s_username.text.toString(),"")
                             compositeDisposable.add(
@@ -146,13 +151,18 @@ class Register : AppCompatActivity() {
     private fun onCreateFailure(t: Throwable) {
 
         Log.e("Moviz-api-create-user","api call failed  : "+t.toString())
+
+        createUserStatus = -1
     }
 
     private fun onCreateResponse(response: ServerResponse) {
         Log.e("Moviz-api-create-user","response : ${response.status}" )
 
         if(response.status.equals("200")){
-
+            createUserStatus = 1
+            if(uploadStatus==1){
+                startActivity(Intent(this,MainActivity::class.java))
+            }
         }else{
             Toast.makeText(this,"an error has occurred !!",Toast.LENGTH_SHORT).show()
             mAuth.currentUser!!.delete()
@@ -172,7 +182,10 @@ class Register : AppCompatActivity() {
         Log.e("Moviz-api-upload","response : ${response.status}" )
 
         if(response.status.equals("200")){
-
+            uploadStatus = 1
+            if(createUserStatus==1){
+                startActivity(Intent(this,MainActivity::class.java))
+            }
         }else{
             Toast.makeText(this,"an error has occurred !!",Toast.LENGTH_SHORT).show()
             mAuth.currentUser!!.delete()

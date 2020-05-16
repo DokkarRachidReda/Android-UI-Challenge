@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Auth.Register"  android:windowSoftInputMode="adjustPan|adjustResize" >
+        <activity android:name=".Auth.Login"></activity>
+        <activity
+            android:name=".Auth.Register"
+            android:windowSoftInputMode="adjustPan|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,9 +26,7 @@
         <activity android:name=".DetailsActivity" />
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan|adjustResize"></activity>
     </application>
 
 </manifest>
