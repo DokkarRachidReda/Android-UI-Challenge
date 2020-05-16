@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingHorizontal="8dp"
-            android:paddingVertical="4dp"
+            android:paddingVertical="6dp"
             android:background="@drawable/x_rounded_25dp_stroke_gray"
             android:textColor="@color/black"
             android:fontFamily="@font/pr_bold"

@@ -27,6 +27,7 @@ import com.reda_dk.uichallenge.moviz.model.movies.Movies
 import com.reda_dk.uichallenge.moviz.model.movies.SingleMovie
 import com.reda_dk.uichallenge.moviz.requestInterface.MovizApiEndPoints
 import com.reda_dk.uichallenge.moviz.requestInterface.TmbdEndPoints
+import com.reda_dk.uichallenge.moviz.season.UserSeason
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -43,7 +44,7 @@ import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
 
     final var baseUrl = "https://api.themoviedb.org/3/"
-    final var movizBaseUrl = "http://192.168.1.6:3000/"
+    final var movizBaseUrl = "http://192.168.1.3:3000/"
     final var api_key = "2e27645e1938878aee2b80d8a00e81a1"
 
     final var imgBaseUrl = "https://image.tmdb.org/t/p/w500"
@@ -53,10 +54,14 @@ class MainActivity : AppCompatActivity() {
 
     val compositeDisposable = CompositeDisposable()
 
+    var user:User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        user = UserSeason(this).getUserSeason()
+
 
         val mclient = OkHttpClient.Builder()
             .connectTimeout(180, TimeUnit.SECONDS)
@@ -108,9 +113,6 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
             setAdapter(typesAdapter)
         }
-
-        /////////////////////////User Data Request ///////////////////////////////////////////
-
 
 
         /////////////////////////Genres GET REQUEST///////////////////////////////////////////
