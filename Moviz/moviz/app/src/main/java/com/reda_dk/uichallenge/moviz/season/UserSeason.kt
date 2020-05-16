@@ -32,4 +32,13 @@ class UserSeason (var context:Context){
         return user
     }
 
+    fun setUserImage(path:String){
+        val pref = context.getSharedPreferences("user_data",0)
+        val editor = pref.edit()
+
+
+        editor.putString("user_img",path)
+        editor.apply()
+    }
+
 }

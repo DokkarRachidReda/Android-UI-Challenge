@@ -23,6 +23,7 @@ import com.reda_dk.uichallenge.moviz.R
 import com.reda_dk.uichallenge.moviz.model.ServerResponse
 import com.reda_dk.uichallenge.moviz.model.User
 import com.reda_dk.uichallenge.moviz.requestInterface.MovizApiEndPoints
+import com.reda_dk.uichallenge.moviz.season.UserSeason
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -51,8 +52,6 @@ class Register : AppCompatActivity() {
 
     var imageUri:Uri? = null
 
-    var uploadStatus = 0 //no request 1:succeed -1 : failed
-    var createUserStatus = 0 //no request 1:succeed -1 : failed
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -81,33 +80,14 @@ class Register : AppCompatActivity() {
                     .addOnCompleteListener { task: Task<AuthResult> ->
 
                         if(task.isSuccessful){
-                            createUserStatus = 0
-                            uploadStatus = 0
-                            // create user in db
-                            val user = User(mAuth.uid!!,s_mail.text.toString(),s_username.text.toString(),"")
-                            compositeDisposable.add(
-                                movizApi.createUser(user)
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribeOn(Schedulers.io())
-                                    . subscribe(this@Register::onCreateResponse, this@Register::onCreateFailure)
-                            )
-
-
-                            if(imageUri != null ){
-                                val file = File((imageUri!!.path!!).removeRange(0,4))  //(imageUri!!.path!!).removeRange(0,4)
-
-                                val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-                                val part = MultipartBody.Part.createFormData("img", file.name, requestBody)
-
+                                // create user in db
+                                val user = User(mAuth.uid!!,s_mail.text.toString(),s_username.text.toString(),"")
                                 compositeDisposable.add(
-                                    movizApi.uploadUserImage(mAuth.uid!!,part)
+                                    movizApi.createUser(user)
                                         .observeOn(AndroidSchedulers.mainThread())
                                         .subscribeOn(Schedulers.io())
-                                        . subscribe(this@Register::onUploadResponse, this@Register::onUploadFailure)
+                                        . subscribe(this@Register::onCreateResponse, this@Register::onCreateFailure)
                                 )
-                            }else Log.e("image","image uri is null")
-
-
 
                         }
 
@@ -151,18 +131,32 @@ class Register : AppCompatActivity() {
     private fun onCreateFailure(t: Throwable) {
 
         Log.e("Moviz-api-create-user","api call failed  : "+t.toString())
-
-        createUserStatus = -1
     }
 
     private fun onCreateResponse(response: ServerResponse) {
         Log.e("Moviz-api-create-user","response : ${response.status}" )
 
         if(response.status.equals("200")){
-            createUserStatus = 1
-            if(uploadStatus==1){
-                startActivity(Intent(this,MainActivity::class.java))
-            }
+
+                if(imageUri != null){
+                    val file = File((imageUri!!.path!!).removeRange(0,4))  //(imageUri!!.path!!).removeRange(0,4)
+
+                    val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+                    val part = MultipartBody.Part.createFormData("img", file.name, requestBody)
+
+                    compositeDisposable.add(
+                        movizApi.uploadUserImage(mAuth.uid!!,part)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.io())
+                            . subscribe(this@Register::onUploadResponse, this@Register::onUploadFailure)
+                    )
+                }else {
+                    Log.e("user-image","no image has been selected")
+                    startActivity(Intent(this,MainActivity::class.java))
+                    finish()
+                }
+
+
         }else{
             Toast.makeText(this,"an error has occurred !!",Toast.LENGTH_SHORT).show()
             mAuth.currentUser!!.delete()
@@ -181,11 +175,12 @@ class Register : AppCompatActivity() {
     private fun onUploadResponse(response: ServerResponse) {
         Log.e("Moviz-api-upload","response : ${response.status}" )
 
-        if(response.status.equals("200")){
-            uploadStatus = 1
-            if(createUserStatus==1){
+        if(! response.status.equals("400")){
+                Log.e("user-image-path",response.status)
+                UserSeason(this).setUserImage(response.status)
                 startActivity(Intent(this,MainActivity::class.java))
-            }
+                finish()
+
         }else{
             Toast.makeText(this,"an error has occurred !!",Toast.LENGTH_SHORT).show()
             mAuth.currentUser!!.delete()
@@ -209,5 +204,12 @@ class Register : AppCompatActivity() {
         }else{
             Log.e("image","there is a freaking error")
         }
+    }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this,Login::class.java))
+        finish()
     }
 }

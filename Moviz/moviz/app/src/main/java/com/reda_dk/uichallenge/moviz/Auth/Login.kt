@@ -71,6 +71,15 @@ class Login : AppCompatActivity() {
                 }
             }
         })
+
+
+
+        to_register.setOnClickListener(object :View.OnClickListener{
+            override fun onClick(v: View?) {
+                startActivity(Intent(this@Login,Register::class.java))
+                finish()
+            }
+        })
     }
 
 

@@ -131,6 +131,7 @@
         android:textColor="#111"
         android:fontFamily="@font/pr_regular"
         android:layout_gravity="center"
+        android:id="@+id/to_register"
         />
 
 

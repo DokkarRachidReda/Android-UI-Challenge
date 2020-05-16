@@ -43,14 +43,13 @@ import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
-    final var baseUrl = "https://api.themoviedb.org/3/"
-    final var movizBaseUrl = "http://192.168.1.3:3000/"
-    final var api_key = "2e27645e1938878aee2b80d8a00e81a1"
-
-    final var imgBaseUrl = "https://image.tmdb.org/t/p/w500"
-    var myHolder:TypesRecyclerAdapter.ViewHolder? = null
-    var firstType = true
-    var searchVisible = false
+     val baseUrl = "https://api.themoviedb.org/3/"
+     val movizBaseUrl = "http://192.168.1.3:3000/"
+     val api_key = "2e27645e1938878aee2b80d8a00e81a1"
+     val imgBaseUrl = "https://image.tmdb.org/t/p/w500"
+     var myHolder:TypesRecyclerAdapter.ViewHolder? = null
+     var firstType = true
+     var searchVisible = false
 
     val compositeDisposable = CompositeDisposable()
 
@@ -62,6 +61,10 @@ class MainActivity : AppCompatActivity() {
 
         user = UserSeason(this).getUserSeason()
 
+        if( ! user!!.img.equals("")){
+            Log.e("user-img-path",movizBaseUrl+user!!.img)
+            Picasso.get().load(movizBaseUrl+user!!.img).into(user_img)
+        }
 
         val mclient = OkHttpClient.Builder()
             .connectTimeout(180, TimeUnit.SECONDS)
@@ -186,22 +189,18 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    inner class TypesRecyclerAdapter:RecyclerView.Adapter<TypesRecyclerAdapter.ViewHolder> {
+    inner class TypesRecyclerAdapter(var list: ArrayList<String>) :
+        RecyclerView.Adapter<TypesRecyclerAdapter.ViewHolder>() {
 
-        var list = ArrayList<String>()
-        constructor(list:ArrayList<String>){this.list = list}
-
-        inner class ViewHolder:RecyclerView.ViewHolder{
+        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             var type: TextView
             var dash: LinearLayout
 
 
-            constructor(itemView:View) : super(itemView){
-
+            init {
                 type = itemView.type
                 dash = itemView.dash
-
             }
 
 
