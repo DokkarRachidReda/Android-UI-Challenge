@@ -67,36 +67,6 @@ class MainActivity : AppCompatActivity() {
             Picasso.get().load(movizBaseUrl+user!!.img).into(user_img)
         }
 
-        val mclient = OkHttpClient.Builder()
-            .connectTimeout(180, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .build()
-
-
-
-        val Movizretrofit = Retrofit.Builder()
-            .baseUrl(movizBaseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(mclient)
-            .build()
-
-        val movizApi = Movizretrofit.create(MovizApiEndPoints::class.java)
-
-        /////////////////////////////// API CALL////////////////////////////////
-         val client = OkHttpClient
-            .Builder()
-            .build()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(client)
-            .build()
-
-        val apiservices = retrofit.create(TmbdEndPoints::class.java)
-
 
 
         search_icon.setOnClickListener(object : View.OnClickListener {
@@ -112,87 +82,26 @@ class MainActivity : AppCompatActivity() {
             }
         })
         /////////////////////////////////////////////////////////
-        var list = ArrayList<String>();list.add("In Theater");list.add("Box Office");list.add("In Theater");list.add("Box Office")
-        var typesAdapter = TypesRecyclerAdapter(list)
+        val list = ArrayList<String>();list.add("In Theater");list.add("Box Office");list.add("In Theater");list.add("Box Office")
+        val typesAdapter = TypesRecyclerAdapter(list)
 
         typeRecycler.apply {
             layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
             setAdapter(typesAdapter)
         }
 
-
-        /////////////////////////Genres GET REQUEST///////////////////////////////////////////
-
-        compositeDisposable.add(
-            apiservices.getGenres(api_key)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                . subscribe(this::onGenresResponse, this::onGenresFailure)
-        )
-
-
-
-        /////////////// TOP Movies GET REQUEST///////////////////////////////////////////
-        compositeDisposable.add(
-            apiservices.getLatestMovies(api_key)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                . subscribe(this::onMoviesResponse, this::onMoviesFailure)
-        )
-
         ////////////////////////////////////////////////////////
 
 
-
-
-    }
-
-
-
-
-    private fun onGenresFailure(t: Throwable) {
-
-        Log.e("Tmdb-api","api call failed  : "+t.toString())
-    }
-
-    private fun onGenresResponse(response: Genres) {
-        Log.e("Tmdb-api-genres","api call succeed")
-
-        Log.e("Tmdb-api-genres-succeed","size  : "+response.genres.size)
-
-        var catRecyclerAdapter = CategoriesRecyclerAdapter(response.genres)
-
-
-        catRecycler.layoutManager =  LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
-        catRecycler.setAdapter(catRecyclerAdapter)
-
+        
 
     }
 
 
 
-    private fun onMoviesFailure(t: Throwable) {
-
-        Log.e("Tmdb-api-movies","api call failed  : "+t.toString())
-        empty.visibility  =View.VISIBLE;empty.playAnimation()
-    }
-
-    private fun onMoviesResponse(response: Movies){
-        Log.e("Tmdb-api-movies-succeed"," size : "+ response.results.size +" total_results  : "+response.total_results + "  total_pages "+response.total_pages)
-
-       if(response.results.size == 0) empty.visibility  =View.VISIBLE;empty.playAnimation()
 
 
-
-
-        var movieAdapter = MovizRecyclerAdapter(response.results)
-        movizRecycler.layoutManager =  LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
-        movizRecycler.setAdapter(movieAdapter)
-
-    }
-
-
-    inner class TypesRecyclerAdapter(var list: ArrayList<String>) :
+    inner class TypesRecyclerAdapter(private var list: ArrayList<String>) :
         RecyclerView.Adapter<TypesRecyclerAdapter.ViewHolder>() {
 
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -265,23 +174,12 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    inner class CategoriesRecyclerAdapter:RecyclerView.Adapter<CategoriesRecyclerAdapter.ViewHolder>{
+    inner class GenresRecyclerAdapter(private var list: ArrayList<SingleGenre>) :
+        RecyclerView.Adapter<GenresRecyclerAdapter.ViewHolder>() {
 
-        var list = ArrayList<SingleGenre>()
-        constructor(list:ArrayList<SingleGenre>){this.list = list}
+        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        inner class ViewHolder:RecyclerView.ViewHolder{
-
-            var category: TextView
-
-            constructor(itemView:View) : super(itemView){
-
-                category = itemView.cat
-
-
-            }
-
-
+            val category: TextView = itemView.cat
 
         }
 
@@ -327,30 +225,24 @@ class MainActivity : AppCompatActivity() {
 
             })
         }
+
+
+        fun setResults(list: ArrayList<SingleGenre>){
+            this.list = list
+            notifyDataSetChanged()
+        }
+
     }
 
 
-    inner class MovizRecyclerAdapter:RecyclerView.Adapter<MovizRecyclerAdapter.ViewHolder>{
+    inner class MovizRecyclerAdapter(var list: ArrayList<SingleMovie>) :
+        RecyclerView.Adapter<MovizRecyclerAdapter.ViewHolder>() {
 
-        var list = ArrayList<SingleMovie>()
-        constructor(list:ArrayList<SingleMovie>){this.list = list}
+        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        inner class ViewHolder:RecyclerView.ViewHolder{
-
-            var img: ImageView
-            var title: TextView
-            var rating: TextView
-
-
-            constructor(itemView:View) : super(itemView){
-
-                img = itemView.img
-                rating = itemView.rating
-                title = itemView.title
-
-
-            }
-
+            val img: ImageView = itemView.img
+            val title: TextView = itemView.title
+            val rating: TextView = itemView.rating
 
 
         }
@@ -415,6 +307,13 @@ class MainActivity : AppCompatActivity() {
             })
 
         }
+
+
+        fun setResults(list: ArrayList<SingleMovie>){
+            this.list = list
+            notifyDataSetChanged()
+        }
+
     }
 
 
