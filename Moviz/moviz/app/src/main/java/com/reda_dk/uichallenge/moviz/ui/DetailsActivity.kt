@@ -1,4 +1,4 @@
-package com.reda_dk.uichallenge.moviz
+package com.reda_dk.uichallenge.moviz.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,10 +11,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.reda_dk.uichallenge.moviz.model.castcrew.CastCrew
-import com.reda_dk.uichallenge.moviz.model.castcrew.MovieWorker
-import com.reda_dk.uichallenge.moviz.model.movies.SingleMovie
-import com.reda_dk.uichallenge.moviz.requestInterface.TmbdEndPoints
+import com.reda_dk.uichallenge.moviz.R
+import com.reda_dk.uichallenge.moviz.data.model.castcrew.CastCrew
+import com.reda_dk.uichallenge.moviz.data.model.castcrew.MovieWorker
+import com.reda_dk.uichallenge.moviz.data.model.movies.SingleMovie
+import com.reda_dk.uichallenge.moviz.data.api.TmbdEndPoints
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -255,7 +256,8 @@ class DetailsActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
 
-        startActivity(Intent(this,MainActivity::class.java))
+        startActivity(Intent(this,
+            MainActivity::class.java))
     }
 
 }

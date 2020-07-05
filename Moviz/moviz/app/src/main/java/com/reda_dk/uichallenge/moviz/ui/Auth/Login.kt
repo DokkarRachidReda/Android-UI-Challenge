@@ -1,20 +1,18 @@
-package com.reda_dk.uichallenge.moviz.Auth
+package com.reda_dk.uichallenge.moviz.ui.Auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.reda_dk.uichallenge.moviz.MainActivity
 import com.reda_dk.uichallenge.moviz.R
-import com.reda_dk.uichallenge.moviz.model.ServerResponse
-import com.reda_dk.uichallenge.moviz.model.User
-import com.reda_dk.uichallenge.moviz.requestInterface.MovizApiEndPoints
+import com.reda_dk.uichallenge.moviz.data.model.User
+import com.reda_dk.uichallenge.moviz.data.api.MovizApiEndPoints
 import com.reda_dk.uichallenge.moviz.season.UserSeason
+import com.reda_dk.uichallenge.moviz.ui.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -87,7 +85,8 @@ class Login : AppCompatActivity() {
         super.onStart()
 
         if(mAuth.currentUser != null ){
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this,
+                MainActivity::class.java))
         }
     }
 
@@ -101,7 +100,8 @@ class Login : AppCompatActivity() {
         Log.e("Moviz-api-retrieve","response : 200")
 
         UserSeason(this).createUserSeason(response)
-        startActivity(Intent(this,MainActivity::class.java))
+        startActivity(Intent(this,
+            MainActivity::class.java))
 
     }
 }

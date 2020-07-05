@@ -1,4 +1,4 @@
-package com.reda_dk.uichallenge.moviz.model.castcrew
+package com.reda_dk.uichallenge.moviz.data.model.castcrew
 
 data class CastCrew(
     val cast: List<Cast>,

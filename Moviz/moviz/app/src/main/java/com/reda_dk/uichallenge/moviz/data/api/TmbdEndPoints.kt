@@ -1,8 +1,8 @@
-package com.reda_dk.uichallenge.moviz.requestInterface
+package com.reda_dk.uichallenge.moviz.data.api
 
-import com.reda_dk.uichallenge.moviz.model.castcrew.CastCrew
-import com.reda_dk.uichallenge.moviz.model.genres.Genres
-import com.reda_dk.uichallenge.moviz.model.movies.Movies
+import com.reda_dk.uichallenge.moviz.data.model.castcrew.CastCrew
+import com.reda_dk.uichallenge.moviz.data.model.genres.Genres
+import com.reda_dk.uichallenge.moviz.data.model.movies.Movies
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

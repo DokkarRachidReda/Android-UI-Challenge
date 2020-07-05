@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Auth.Login">
+        <activity android:name="com.reda_dk.uichallenge.moviz.ui.Auth.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,13 +21,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Auth.Register"
+            android:name="com.reda_dk.uichallenge.moviz.ui.Auth.Register"
             android:windowSoftInputMode="adjustPan|adjustResize">
 
         </activity>
-        <activity android:name=".DetailsActivity" />
+        <activity android:name=".ui.DetailsActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:windowSoftInputMode="adjustPan|adjustResize" />
     </application>
 

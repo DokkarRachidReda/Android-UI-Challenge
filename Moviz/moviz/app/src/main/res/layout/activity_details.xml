@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:weightSum="7"
     android:orientation="vertical"
-    tools:context=".DetailsActivity">
+    tools:context=".ui.DetailsActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

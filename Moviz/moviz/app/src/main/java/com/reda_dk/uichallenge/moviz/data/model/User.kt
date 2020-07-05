@@ -1,4 +1,4 @@
-package com.reda_dk.uichallenge.moviz.model
+package com.reda_dk.uichallenge.moviz.data.model
 
 data class User(
     val id: String,

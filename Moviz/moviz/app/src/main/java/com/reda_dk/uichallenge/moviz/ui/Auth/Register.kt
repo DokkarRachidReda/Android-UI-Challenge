@@ -1,4 +1,4 @@
-package com.reda_dk.uichallenge.moviz.Auth
+package com.reda_dk.uichallenge.moviz.ui.Auth
 
 import android.Manifest
 import android.app.Activity
@@ -18,21 +18,19 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
-import com.reda_dk.uichallenge.moviz.MainActivity
 import com.reda_dk.uichallenge.moviz.R
-import com.reda_dk.uichallenge.moviz.model.ServerResponse
-import com.reda_dk.uichallenge.moviz.model.User
-import com.reda_dk.uichallenge.moviz.requestInterface.MovizApiEndPoints
+import com.reda_dk.uichallenge.moviz.data.model.ServerResponse
+import com.reda_dk.uichallenge.moviz.data.model.User
+import com.reda_dk.uichallenge.moviz.data.api.MovizApiEndPoints
 import com.reda_dk.uichallenge.moviz.season.UserSeason
+import com.reda_dk.uichallenge.moviz.ui.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_register.*
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -48,7 +46,7 @@ class Register : AppCompatActivity() {
     val compositeDisposable = CompositeDisposable()
     val mAuth = FirebaseAuth.getInstance()
 
-    lateinit var movizApi:MovizApiEndPoints
+    lateinit var movizApi: MovizApiEndPoints
 
     var imageUri:Uri? = null
 
@@ -152,7 +150,8 @@ class Register : AppCompatActivity() {
                     )
                 }else {
                     Log.e("user-image","no image has been selected")
-                    startActivity(Intent(this,MainActivity::class.java))
+                    startActivity(Intent(this,
+                        MainActivity::class.java))
                     finish()
                 }
 
@@ -178,7 +177,8 @@ class Register : AppCompatActivity() {
         if(! response.status.equals("400")){
                 Log.e("user-image-path",response.status)
                 UserSeason(this).setUserImage(response.status)
-                startActivity(Intent(this,MainActivity::class.java))
+                startActivity(Intent(this,
+                    MainActivity::class.java))
                 finish()
 
         }else{

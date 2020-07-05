@@ -1,4 +1,4 @@
-package com.reda_dk.uichallenge.moviz.model.movies
+package com.reda_dk.uichallenge.moviz.data.model.movies
 
 data class Movies(
     val page: Int,

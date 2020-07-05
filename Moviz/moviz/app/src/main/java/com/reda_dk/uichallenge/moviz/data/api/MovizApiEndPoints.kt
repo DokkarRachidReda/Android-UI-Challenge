@@ -1,10 +1,9 @@
-package com.reda_dk.uichallenge.moviz.requestInterface
+package com.reda_dk.uichallenge.moviz.data.api
 
-import com.reda_dk.uichallenge.moviz.model.ServerResponse
-import com.reda_dk.uichallenge.moviz.model.User
+import com.reda_dk.uichallenge.moviz.data.model.ServerResponse
+import com.reda_dk.uichallenge.moviz.data.model.User
 import io.reactivex.Observable
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface MovizApiEndPoints {

@@ -1,8 +1,7 @@
 package com.reda_dk.uichallenge.moviz.season
 
 import android.content.Context
-import android.content.SharedPreferences
-import com.reda_dk.uichallenge.moviz.model.User
+import com.reda_dk.uichallenge.moviz.data.model.User
 
 class UserSeason (var context:Context){
 

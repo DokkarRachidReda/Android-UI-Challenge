@@ -1,4 +1,4 @@
-package com.reda_dk.uichallenge.moviz
+package com.reda_dk.uichallenge.moviz.ui
 
 import android.animation.ObjectAnimator
 import android.content.Intent
@@ -20,13 +20,14 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.recyclerview.widget.RecyclerView
-import com.reda_dk.uichallenge.moviz.model.User
-import com.reda_dk.uichallenge.moviz.model.genres.Genres
-import com.reda_dk.uichallenge.moviz.model.genres.SingleGenre
-import com.reda_dk.uichallenge.moviz.model.movies.Movies
-import com.reda_dk.uichallenge.moviz.model.movies.SingleMovie
-import com.reda_dk.uichallenge.moviz.requestInterface.MovizApiEndPoints
-import com.reda_dk.uichallenge.moviz.requestInterface.TmbdEndPoints
+import com.reda_dk.uichallenge.moviz.R
+import com.reda_dk.uichallenge.moviz.data.model.User
+import com.reda_dk.uichallenge.moviz.data.model.genres.Genres
+import com.reda_dk.uichallenge.moviz.data.model.genres.SingleGenre
+import com.reda_dk.uichallenge.moviz.data.model.movies.Movies
+import com.reda_dk.uichallenge.moviz.data.model.movies.SingleMovie
+import com.reda_dk.uichallenge.moviz.data.api.MovizApiEndPoints
+import com.reda_dk.uichallenge.moviz.data.api.TmbdEndPoints
 import com.reda_dk.uichallenge.moviz.season.UserSeason
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
      val movizBaseUrl = "http://192.168.1.3:3000/"
      val api_key = "2e27645e1938878aee2b80d8a00e81a1"
      val imgBaseUrl = "https://image.tmdb.org/t/p/w500"
-     var myHolder:TypesRecyclerAdapter.ViewHolder? = null
+     var myHolder: TypesRecyclerAdapter.ViewHolder? = null
      var firstType = true
      var searchVisible = false
 
@@ -101,7 +102,9 @@ class MainActivity : AppCompatActivity() {
         search_icon.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 searchbar.visibility = View.VISIBLE
-                val hyperspaceJump: Animation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.frombottom)
+                val hyperspaceJump: Animation = AnimationUtils.loadAnimation(this@MainActivity,
+                    R.anim.frombottom
+                )
                 searchbar.startAnimation(hyperspaceJump)
                 searchVisible = true
 
@@ -232,19 +235,25 @@ class MainActivity : AppCompatActivity() {
             holder.type.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(v: View?) {
 
-                    myHolder!!.type.setTextColor(this@MainActivity.resources.getColor(R.color.gray))
+                    myHolder!!.type.setTextColor(this@MainActivity.resources.getColor(
+                        R.color.gray
+                    ))
                     myHolder!!.dash.visibility = View.GONE
 
                     holder.type.setTextColor(this@MainActivity.resources.getColor(R.color.black))
                     holder.dash.visibility = View.VISIBLE
 
-                    val anim: Animation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.lefttoright)
+                    val anim: Animation = AnimationUtils.loadAnimation(this@MainActivity,
+                        R.anim.lefttoright
+                    )
                     //holder.dash.startAnimation(anim)
 
                     myHolder = holder
 
                     if(searchVisible){
-                        val hyperspaceJump: Animation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fromtop)
+                        val hyperspaceJump: Animation = AnimationUtils.loadAnimation(this@MainActivity,
+                            R.anim.fromtop
+                        )
                         searchbar.startAnimation(hyperspaceJump)
                         searchbar.visibility = View.GONE
                         searchVisible = false
@@ -306,7 +315,9 @@ class MainActivity : AppCompatActivity() {
 
 
                     if(searchVisible){
-                        val hyperspaceJump: Animation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fromtop)
+                        val hyperspaceJump: Animation = AnimationUtils.loadAnimation(this@MainActivity,
+                            R.anim.fromtop
+                        )
                         searchbar.startAnimation(hyperspaceJump)
                         searchbar.visibility = View.GONE
                         searchVisible = false
@@ -377,7 +388,8 @@ class MainActivity : AppCompatActivity() {
 
             holder.itemView.img.setOnClickListener(object :View.OnClickListener{
                 override fun onClick(v: View?) {
-                    var i = Intent(this@MainActivity,DetailsActivity::class.java)
+                    var i = Intent(this@MainActivity,
+                        DetailsActivity::class.java)
                     i.putExtra("movie",list[position])
 
                     this@MainActivity.startActivity(i)
@@ -389,7 +401,9 @@ class MainActivity : AppCompatActivity() {
             holder.itemView.setOnTouchListener(object : View.OnTouchListener {
                 override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                     if(searchVisible){
-                        val hyperspaceJump: Animation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fromtop)
+                        val hyperspaceJump: Animation = AnimationUtils.loadAnimation(this@MainActivity,
+                            R.anim.fromtop
+                        )
                         searchbar.startAnimation(hyperspaceJump)
                         searchbar.visibility = View.GONE
                         searchVisible = false
